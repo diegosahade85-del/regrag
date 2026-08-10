@@ -16,7 +16,7 @@ FastAPI, ragas.
 ```bash
 uv sync
 docker compose up -d                         # Postgres 17 + pgvector
-uv run pytest                                # 77 tests
+uv run pytest                                # 85 tests
 uv run python scripts/ingest_corpus.py       # corpus -> data/processed/*.jsonl
 uv run python scripts/index_corpus.py        # embed + load into Postgres
 uv run python scripts/search.py "¿qué exige el artículo 4 sobre marcado?"
@@ -36,9 +36,9 @@ jurisdictions:
 
 | Strategy | Chunks | Median chars | p95 | Max | Carry an article label |
 |---|---|---|---|---|---|
-| `article` | 313 | 2,744 | 25,926 | **168,351** | 96% |
-| `fixed` (1200/200) | 2,053 | 1,197 | 1,200 | 1,200 | **0%** |
-| `hybrid` (1200/200) | 2,225 | 1,196 | 1,200 | 1,200 | 92% |
+| `article` | 289 | 3,042 | 27,423 | **168,351** | 96% |
+| `fixed` (1200/200) | 2,081 | 1,197 | 1,200 | 1,200 | **0%** |
+| `hybrid` (1200/200) | 2,170 | 1,196 | 1,200 | 1,200 | 91% |
 
 **`article` alone fails on size.** Splitting on article boundaries is
 semantically right — a regulatory obligation is scoped to its article — but
@@ -57,16 +57,48 @@ clause is an answer they cannot act on.
 
 **`hybrid` is what ships.** Split on article boundaries first, then window only
 the articles that exceed the budget, propagating the article label onto every
-piece. Bounded like `fixed` (max 1,200 chars), citable like `article` (92% of
+piece. Bounded like `fixed` (max 1,200 chars), citable like `article` (91% of
 chunks carry a label; the remainder are preambles and recitals, which genuinely
 have no article number).
 
 Whether 1200/200 is the right budget is an open question — that gets settled
 against the eval set, not by argument.
 
+### Deduplication: same law, indexed twice
+
+Several norms are published in more than one place, and both renderings are in
+the corpus: Res. SIC 16/2025 as the Boletín Oficial edition *and* the *texto
+original* page, ENACOM Res. 57/2026 as a PDF *and* its HTML. Their articles came
+out **byte-identical** — measured at cosine similarity 1.0000 with matching
+character counts across 50 cross-variant pairs — so every such clause was
+embedded twice, cost twice, and competed against itself for retrieval slots.
+
+Deduplication is on normalized text within a single norm, which drops 55 chunks
+(2,225 → 2,170). Two details matter:
+
+- **Chunk-level, not document-level.** Dropping a whole rendering would discard
+  the content only that rendering has — the *texto original* page carries annexes
+  the Boletín edition does not (12,874 vs 25,876 characters for the same 13
+  articles). Collapsing identical chunks keeps everything unique from both.
+- **Scoped per norm.** Closing formulas like "Comuníquese, publíquese y
+  archívese" recur across unrelated norms. Each is a real, separately-citable
+  clause of its own norm, not a duplicate, so the key is `(norm_id, text)`.
+
+Exact cross-variant pairs fell from 50 to 2. The residue is windowing, not
+duplication: the two renderings differ slightly in length, so window boundaries
+inside long articles land in different places and produce overlapping — not
+repeated — chunks.
+
+**This did not move recall@10** (12/17 before and after). Deduplication is
+corpus hygiene: it halves the embedding cost of the affected norms and stops one
+clause occupying two result slots, but the retrieval failures below are failures
+of matching, not of slot competition. Worth recording as a negative result — and
+it means the Day-4 hybrid comparison runs against a clean corpus, so any
+improvement is attributable to the retrieval change alone.
+
 ### Retrieval baseline: dense search, and where it breaks
 
-2,225 chunks embedded with `voyage-3` (1024 dimensions), cosine similarity.
+2,170 chunks embedded with `voyage-3` (1024 dimensions), cosine similarity.
 The corpus is its own ground truth here: for each probe, SQL finds by exact
 string match which chunks actually contain it, then dense retrieval is asked
 the same thing. No annotation required, and the measurement is reproducible
@@ -103,7 +135,7 @@ that matters most.
 ### No ANN index at this corpus size
 
 pgvector warned `ivfflat index created with little data`, so the index was
-measured rather than trusted:
+measured rather than trusted (on the 2,225-chunk corpus, before deduplication):
 
 | Configuration | recall@10 vs exact | Latency |
 |---|---|---|
@@ -113,7 +145,7 @@ measured rather than trusted:
 | IVFFlat `lists=10, probes=10` | 10/10 | 16.1 ms |
 
 Every configuration that reaches full recall is **as slow as or slower than**
-scanning all 2,225 vectors exactly. Approximate search is a trade, and at this
+scanning the whole table exactly. Approximate search is a trade, and at this
 size there is nothing to buy, so the indexer drops the index below a 50,000-row
 threshold and says so. The threshold and the tuning belong together: `lists`
 must scale with row count (pgvector's guidance is `rows/1000`), and a default
@@ -170,9 +202,13 @@ why they all carry tests.
 - Article-number extraction on the RETIE PDF recovers 32 headers but skips a
   few (22, 25, 28–30, 33) and reports one out of sequence, most likely headers
   broken across page boundaries during PDF extraction. Not yet investigated.
-- Two norms are indexed twice under different variants (Res. 16/2025 as both
-  the Boletín Oficial and the *texto original* rendering; ENACOM Res. 57/2026 as
-  both PDF and HTML). Near-duplicate chunks therefore compete for the same
-  retrieval slots. Deduplication is not implemented.
+- Deduplication is exact-match only. Two norms are published in two renderings
+  each, and where windowing splits a long article at different offsets the
+  resulting chunks overlap without being identical — 28 cross-variant pairs
+  still sit above cosine 0.9. Near-duplicate collapsing is not implemented, and
+  is a judgement call rather than an obvious win: those chunks are not the same
+  text, so merging them would discard content.
+- Everything is measured on 17 probes. That is enough to establish a direction
+  and not enough to be precise about it; the Day-6 golden set replaces it.
 - 13 source documents against a target of 30–60. Four downloads are blocked at
   the network level from the VPS (see `data/sources.md`).

@@ -10,7 +10,7 @@ import json
 import statistics
 from pathlib import Path
 
-from regrag.ingest import chunk_document, to_record
+from regrag.ingest import chunk_document, deduplicate, to_record
 
 RAW = Path("data/raw")
 PROCESSED = Path("data/processed")
@@ -30,6 +30,10 @@ def main() -> None:
             except Exception as exc:  # keep going; report at the end
                 failures.append((path.name, f"{type(exc).__name__}: {exc}"))
 
+        before = len(records)
+        records = deduplicate(records)
+        dropped = before - len(records)
+
         out = PROCESSED / f"chunks_{strategy}.jsonl"
         with out.open("w", encoding="utf-8") as fh:
             for record in records:
@@ -38,7 +42,7 @@ def main() -> None:
         sizes = [r["n_chars"] for r in records] or [0]
         with_article = sum(1 for r in records if r["article"])
         print(f"[{strategy}] -> {out}")
-        print(f"  chunks         {len(records)}")
+        print(f"  chunks         {len(records)}  (dropped {dropped} duplicates)")
         print(f"  chars  median  {int(statistics.median(sizes))}")
         print(f"         p95     {int(sorted(sizes)[int(len(sizes) * 0.95) - 1])}")
         print(f"         max     {max(sizes)}")
