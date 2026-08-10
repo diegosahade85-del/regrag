@@ -16,13 +16,14 @@ FastAPI, ragas.
 ```bash
 uv sync
 docker compose up -d                         # Postgres 17 + pgvector
-uv run pytest                                # 137 tests
+uv run pytest                                # 157 tests
 uv run python scripts/ingest_corpus.py       # corpus -> data/processed/*.jsonl
 uv run python scripts/index_corpus.py        # embed + load into Postgres
 uv run python scripts/search.py "¿qué exige el artículo 4 sobre marcado?"
 uv run python scripts/search.py --mode dense "IEC 60364"   # or lexical / hybrid
 uv run python scripts/diagnose_retrieval.py  # dense vs lexical vs hybrid
 uv run python scripts/ask.py "¿qué obligaciones tienen los importadores?"
+uv run python scripts/golden_status.py       # eval set progress + validation
 ```
 
 Corpus documents are not committed (see `data/sources.md` for provenance and
@@ -219,6 +220,44 @@ have. Three levels the prompt defines explicitly — *does the context answer th
 directly, partially, or only tangentially* — are a question the model can
 actually answer.
 
+### The golden set: unreviewed ground truth is worse than none
+
+Everything above is measured against the corpus itself, which works for "is the
+chunk containing this string retrieved?" and cannot answer "is this the article
+that resolves the question?". That needs questions with a verified answer and
+the clause behind it — `evals/golden_set.json`, versioned in the repo.
+
+**Entries carry a `status`, and the eval only scores `reviewed` ones.** A draft
+is a model's reading of a clause, which is precisely the thing the eval exists
+to check; scoring against it produces a number that looks like a measurement and
+measures nothing. `reviewed_only()` enforces this in code rather than leaving it
+to discipline.
+
+Schema validation rejects the ways an entry can be quietly unscoreable: an
+answerable question with no citation (nothing to check it against), a trap
+marked answerable, a trap carrying citations, duplicate ids.
+`golden_status.py` additionally checks every citation against the indexed
+corpus and exits non-zero on a miss — a transposed article number reads fine on
+the page and makes the entry useless.
+
+**Drafting is automated; judging is not.** `draft_questions.py` produces
+candidates in three shapes: factual questions from a single article, comparative
+questions from cross-country article pairs (found by cosine proximity between
+jurisdictions — two articles whose vectors sit close together are two countries
+legislating the same topic), and traps designed to be tempting rather than
+obviously foreign. That turns "write 50 questions" into "review 60 drafts",
+which spends the domain expert's time on the part that needs it.
+
+Two biases the review has to correct, both documented in `evals/REVIEW.md`:
+
+- **A question generated from a chunk shares its vocabulary**, so retrieval
+  finds it easily and recall comes out flattering. The prompt asks for a
+  practitioner's phrasing rather than the article's; rewriting the question is
+  the real fix.
+- **The model drafts what it believes the article says.** Where it is subtly
+  wrong — "deberá" read as "podrá", an exception missed — the draft reads
+  fluently and is wrong, which is the hardest failure to catch by skimming.
+
 ### No ANN index at this corpus size
 
 pgvector warned `ivfflat index created with little data`, so the index was
@@ -300,8 +339,12 @@ why they all carry tests.
 - Everything is measured on 22 probes, and the harness answers "is the chunk
   containing this string in the top 10?" — not "is the retrieved article the one
   that answers the question?". That is enough to establish a direction and not
-  enough to be precise about it; the golden set of real compliance questions,
-  with human-verified answers, replaces it.
+  enough to be precise about it; the golden set replaces it.
+- **The golden set is 60 drafts and 0 reviewed entries.** No quality number in
+  this README rests on it yet, and the eval refuses to score against drafts.
+- All six synthesis drafts pair Argentina with Colombia, because those two
+  jurisdictions dominate the corpus. Comparisons involving Chile, Peru, Uruguay
+  or Paraguay need more source documents first.
 - `k = 60` and a 5× candidate pool are the conventional defaults, carried over
   untested. Both are tunable against the golden set once it exists.
 - 13 source documents against a target of 30–60. Four downloads are blocked at

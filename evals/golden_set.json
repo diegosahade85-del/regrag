@@ -1,0 +1,922 @@
+{
+  "questions": [
+    {
+      "id": "q001",
+      "question": "En Argentina, ¿siguen vigentes las resoluciones de homologación de equipos de telecomunicaciones que emitió la ex Secretaría de Comunicaciones y el ENACOM antes de esta nueva normativa de 2026?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "No, esas resoluciones (incluyendo las N° 763/78, 729/80, 4528/81, 519/83, 179/84, 549/84, 585/84, 66/85, 83/86, 107/87, 784/87, 11.153/99, 9/2001 y 5424/19) quedan derogadas a partir del 1 de septiembre de 2026. Hasta esa fecha continúan vigentes.",
+      "citations": [
+        {
+          "country": "AR",
+          "norm_id": "res-57-2026",
+          "article": "16"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q002",
+      "question": "En Colombia, si al inspeccionar el medidor de un usuario un operador de red detecta que la instalación eléctrica interna representa un peligro inminente para las personas, ¿el dueño puede alegar que la instalación es anterior a la entrada en vigencia del RETIE para no corregirla, y qué pasa si igual se niega a hacerlo?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "No, la fecha de entrada en vigencia del reglamento no es excusa válida: el propietario o tenedor debe realizar las adecuaciones necesarias para eliminar o minimizar el riesgo. Si aun así se niega a corregir las deficiencias, cualquier ciudadano puede denunciar ante el Operador de Red, los entes de Control y Vigilancia, o acudir a mecanismos de participación ciudadana ante autoridades judiciales.",
+      "citations": [
+        {
+          "country": "CO",
+          "norm_id": "res-9703",
+          "article": "10"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q003",
+      "question": "En Argentina, si una empresa no cumple con lo exigido por la Resolución 16/2025, ¿qué régimen sancionatorio se le puede aplicar además de otras responsabilidades que pudieran corresponder?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "Se le pueden aplicar las sanciones previstas en la Ley 24.240 (Defensa del Consumidor) y su Decreto reglamentario 274/2019, sin perjuicio de que además pueda existir responsabilidad penal, civil o administrativa según el Decreto 1.759/72 (T.O. 2017), art. 110.",
+      "citations": [
+        {
+          "country": "AR",
+          "norm_id": "res-16-2025",
+          "article": "6"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q004",
+      "question": "En Colombia, si quiero importar duchas eléctricas de paso y ya cuento con certificación de producto obtenida bajo la Resolución 181294 de 2008, ¿esa certificación me sirve mientras entra en vigencia el nuevo reglamento o tengo que recertificar de inmediato?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "Sí, esos certificados deben ser aceptados durante los seis meses siguientes a la publicación del nuevo Anexo General, plazo en el cual aún no es exigible el nuevo Certificado de Conformidad RETIE para ese producto. Pasado ese período transitorio, deberá contarse con el certificado bajo los nuevos requisitos.",
+      "citations": [
+        {
+          "country": "CO",
+          "norm_id": "res-9703",
+          "article": "36"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q005",
+      "question": "En Argentina, ¿una empresa que quiere actuar como agencia de certificación de materiales de telecomunicaciones para trámites de homologación necesita anotarse en algún registro oficial?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "Sí, la norma crea el Registro de Agencias de Certificación de Materiales de Telecomunicaciones en el ámbito de la Dirección Nacional de Ingeniería del Espectro Radioeléctrico y Servicios de TIC. Las personas jurídicas que quieran realizar esta actividad de certificación para homologación deberán inscribirse en dicho registro, cumpliendo las condiciones del reglamento correspondiente.",
+      "citations": [
+        {
+          "country": "AR",
+          "norm_id": "res-57-2026",
+          "article": "4"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q006",
+      "question": "En Colombia, si soy responsable de una instalación eléctrica en operación y necesito acreditar que no representa alto riesgo conforme al RETIE, ¿qué debo firmar y qué datos de contacto tengo que incluir?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "Debe firmar una declaración donde manifiesta, bajo su responsabilidad como operador o mantenedor, que la instalación eléctrica no presenta alto riesgo eléctrico según el RETIE, indicando fecha y ciudad de la firma. Además debe consignar sus datos de notificación: dirección, teléfono y correo electrónico, y adjuntar los anexos correspondientes.",
+      "citations": [
+        {
+          "country": "CO",
+          "norm_id": "res-40117-2024",
+          "article": "4"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q007",
+      "question": "Estoy por importar equipamiento eléctrico a Argentina. ¿Existe alguna categoría de aislación que no pueda usarse en estos productos según la normativa de seguridad eléctrica?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "Sí, la normativa prohíbe expresamente utilizar equipamiento con clases de aislación 0 y 0I. Además, se exige que la clase de aislación elegida sea adecuada a las condiciones de uso previstas, y que el equipo esté diseñado para proteger a personas, animales y bienes contra contactos directos e indirectos, temperaturas o radiaciones peligrosas, siempre que se use según las indicaciones del fabricante y reciba el mantenimiento adecuado.",
+      "citations": [
+        {
+          "country": "AR",
+          "norm_id": "res-92-1998",
+          "article": "9"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q008",
+      "question": "En Colombia, si una instalación eléctrica tiene circuitos con distintos niveles de tensión, ¿con qué categoría se debe clasificar el sistema en su conjunto según el RETIE?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "Debe clasificarse en el grupo correspondiente al valor de tensión nominal más elevado presente en la instalación, tomando como referencia las categorías estandarizadas (muy baja, baja, media, alta o extra alta tensión). Es decir, no se promedia ni se toma el valor más común, sino el más alto de todos los circuitos o elementos existentes.",
+      "citations": [
+        {
+          "country": "CO",
+          "norm_id": "res-9703",
+          "article": "12"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q009",
+      "question": "En Argentina, además de esta resolución específica, ¿hay otras normas que también debo tener en cuenta para el trámite de certificación de un producto bajo este régimen?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "Sí, el artículo remite a la Resolución 237/2024 de la Secretaría de Industria y Comercio y a la Disposición N° 1/2024 de la Dirección Nacional de Reglamentos Técnicos, que resultan aplicables como normas complementarias. También quedan comprendidas las disposiciones complementarias que se dicten en el futuro sobre la materia.",
+      "citations": [
+        {
+          "country": "AR",
+          "norm_id": "res-16-2025",
+          "article": "11"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q010",
+      "question": "En Colombia, si una empresa contratista se dedica al mantenimiento de instalaciones eléctricas, ¿está obligada a tener su propio plan de prevención de riesgos laborales o puede compartirlo con otra empresa del mismo grupo?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "Todo empleador que realice construcción, operación o mantenimiento de instalaciones eléctricas, incluidos contratistas y subcontratistas, debe organizar y garantizar el funcionamiento de un programa de Salud Ocupacional propio. Se permite compartir recursos entre empresas, pero el programa nunca puede abarcar a dos empresas a la vez, y su cumplimiento es vigilado por la autoridad competente.",
+      "citations": [
+        {
+          "country": "CO",
+          "norm_id": "res-9703",
+          "article": "5"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q011",
+      "question": "En Argentina, ¿el Estado puede exigir requisitos de calidad y seguridad a los productos que se venden en el país, aunque eso implique una restricción al comercio internacional?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "Sí. El artículo señala que el Acuerdo sobre Obstáculos Técnicos al Comercio de la OMC (incorporado por Ley 24.425) reconoce que no debe impedirse a ningún país adoptar las medidas necesarias para asegurar la calidad de sus exportaciones o proteger la salud, el medio ambiente y prevenir prácticas engañosas. Por eso, es función del Estado Nacional dictar reglamentos técnicos y sus revisiones para garantizar la protección de la salud, seguridad y bienestar de las personas respecto de los bienes comercializados en el país.",
+      "citations": [
+        {
+          "country": "AR",
+          "norm_id": "res-16-2025",
+          "article": "13"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q012",
+      "question": "En Colombia, al momento de clasificar el tipo de aislamiento de un cable eléctrico para su certificación, ¿qué diferencia hay entre las siglas THHN y THW que usa la reglamentación técnica?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "Según la resolución, THHN identifica un termoplástico resistente al calor hasta 90°C, mientras que THW es un termoplástico resistente al calor hasta 75°C y a la humedad. Son solo definiciones técnicas de las siglas, no establecen una obligación ni una facultad en sí mismas.",
+      "citations": [
+        {
+          "country": "CO",
+          "norm_id": "res-9703",
+          "article": "6"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q013",
+      "question": "Si en Argentina inicio hoy la inscripción de un equipo en el RAMATEL antes de septiembre de 2026, ¿con qué normativa se tramita y qué pasa cuando venza esa inscripción?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "Hasta el 1 de septiembre de 2026 las inscripciones en el RAMATEL se tramitan según la Resolución 729/80 y normas concordantes, no con el nuevo reglamento. Esas inscripciones tienen una vigencia de 3 años, y al cumplirse ese plazo deberán adecuarse al nuevo Reglamento aprobado en el artículo 1°; si no se adecuan, se dan de baja automáticamente.",
+      "citations": [
+        {
+          "country": "AR",
+          "norm_id": "res-57-2026",
+          "article": "13"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q014",
+      "question": "En Colombia, ¿desde qué punto de la red eléctrica hacia adentro se considera que una edificación es responsable de cumplir el reglamento técnico para instalaciones internas, y qué pasa si la propiedad incluye una subestación?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "Las instalaciones de uso final comprenden desde la acometida de servicio hacia el interior de la edificación, o hasta el punto de conexión de los equipos de consumo. Si la instalación no es propiedad del operador de red e incluye una subestación, tanto la acometida como la subestación se consideran parte de la instalación de uso final, sin perjuicio de que deban cumplirse además los requisitos aplicables al proceso de transformación.",
+      "citations": [
+        {
+          "country": "CO",
+          "norm_id": "res-9703",
+          "article": "26"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q015",
+      "question": "En Argentina, si quiero importar y vender artefactos eléctricos alcanzados por esta normativa, ¿qué certificación necesito y quién puede emitirla?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "Se debe contar con una certificación de seguridad de producto que acredite el cumplimiento de los requisitos esenciales de seguridad, y esa certificación solo puede ser otorgada por un organismo de certificación acreditado por el Organismo Argentino de Acreditación (OAA), siguiendo el procedimiento y plazos del Anexo II. Los requisitos se consideran cumplidos si se satisfacen las normas IRAM o IEC aplicables al equipo eléctrico en cuestión, y los productos certificados deben llevar un sello indeleble que identifique esta condición.",
+      "citations": [
+        {
+          "country": "AR",
+          "norm_id": "res-92-1998",
+          "article": "3"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q016",
+      "question": "En Colombia, si al diseñar una instalación eléctrica quiero aplicar una tecnología nueva que no está contemplada en el RETIE, ¿puedo hacerlo directamente o necesito algún tipo de aprobación previa?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "No puede aplicarla directamente: el diseñador debe justificar la innovación ante el Ministerio de Minas y Energía, indicando los objetivos perseguidos y las normas internacionales o prescripciones en que se basa. El Ministerio podrá aceptar o rechazar el proyecto según si la justificación es suficiente y compatible con los objetivos del reglamento, es decir, se trata de una facultad discrecional del Ministerio, no de una autorización automática.",
+      "citations": [
+        {
+          "country": "CO",
+          "norm_id": "res-9703",
+          "article": "37"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q017",
+      "question": "En Argentina, ¿siguen vigentes las viejas resoluciones de comercio interior de 1987, 1998 y 2018 sobre las que se basaba antes la reglamentación de un producto, o fueron reemplazadas por una norma nueva?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "No están vigentes: la Resolución 16/2025 derogó expresamente la Resolución 731/1987 de la ex Secretaría de Comercio Interior, la Resolución 524/1998 de la ex Secretaría de Industria, Comercio y Minería y la Resolución 169/2018 de la ex Secretaría de Comercio, junto con sus modificatorias y complementarias.",
+      "citations": [
+        {
+          "country": "AR",
+          "norm_id": "res-16-2025",
+          "article": "8"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q018",
+      "question": "Estoy diseñando una subestación eléctrica en Colombia y necesito saber si puedo dejar pasar por dentro tuberías de agua o de gas natural, ¿el reglamento técnico lo permite?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "No, el RETIE prohíbe que por las subestaciones crucen canalizaciones de agua, gas natural, aire comprimido, gases industriales o combustibles. La única excepción permitida son las tuberías destinadas a la extinción de incendios y a la refrigeración de los equipos de la subestación.",
+      "citations": [
+        {
+          "country": "CO",
+          "norm_id": "res-9703",
+          "article": "23"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q019",
+      "question": "Tengo en Argentina un equipo de telecomunicaciones que ya está inscripto en el RAMATEL bajo la normativa anterior: ¿esa inscripción sigue siendo válida o tengo que hacer algún trámite para no perderla, y en qué plazo?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "La inscripción del material se mantiene vigente pero solo por 3 años desde la publicación de la resolución; dentro de ese plazo deberá adecuarse al nuevo reglamento, caso contrario se dará de baja automáticamente. En cambio, si la inscripción es en el Registro de Actividades, esa sí mantiene su condición sin necesidad de renovarla.",
+      "citations": [
+        {
+          "country": "AR",
+          "norm_id": "res-57-2026",
+          "article": "5"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q020",
+      "question": "Para importar en Colombia cables destinados a ambientes especiales o de seguridad, ¿qué ensayos mínimos deben acreditarse y bajo qué normas de referencia?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "El artículo indica que estos cables deben cumplir ensayos mínimos adaptados de normas como UL 1424, UL 1425, UL 1569 y UL 2225, incluyendo al menos la verificación dimensional (diámetro). No se trata de una facultad opcional: son ensayos mínimos requeridos para este tipo de conductores.",
+      "citations": [
+        {
+          "country": "CO",
+          "norm_id": "res-40117-2024",
+          "article": "2"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q021",
+      "question": "En Argentina, ¿qué organismo tiene la potestad de ampliar o modificar el listado de productos comprendidos en el reglamento técnico establecido por la Resolución 16/2025 y de emitir normas aclaratorias para su implementación?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "La Dirección Nacional de Reglamentos Técnicos, dependiente de la Secretaría de Industria y Comercio del Ministerio de Economía, está facultada (no obligada) para modificar el reglamento en cuanto a los productos alcanzados y para dictar normas complementarias o aclaratorias que permitan hacer operativa la resolución.",
+      "citations": [
+        {
+          "country": "AR",
+          "norm_id": "res-16-2025",
+          "article": "5"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q022",
+      "question": "En Colombia, si un fabricante de tableros eléctricos incumple los requisitos del RETIE, ¿bajo qué marco legal se le puede sancionar?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "El artículo remite a la legislación colombiana vigente aplicable a cada tipo de actor. Para fabricantes, productores, comercializadores y constructores que incorporen instalaciones objeto del RETIE, las sanciones se aplican conforme a las disposiciones legales aplicables (incluyendo protección al consumidor, Ley 1480, cuando corresponda), sin perjuicio de la responsabilidad civil o penal a que haya lugar.",
+      "citations": [
+        {
+          "country": "CO",
+          "norm_id": "res-9703",
+          "article": "35"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q023",
+      "question": "En Argentina, si tengo la inscripción de un equipo de telecomunicaciones a mi nombre, ¿qué debo hacer con cada unidad del producto y qué dato tengo que citar en los trámites y documentos vinculados a esa actividad?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "Es una obligación: debo marcar o identificar cada unidad del material inscripto conforme a la reglamentación vigente, y debo consignar el número de inscripción en toda la documentación que genere en el ejercicio de la actividad y en cualquier gestión para obtener autorizaciones de sistemas de telecomunicaciones.",
+      "citations": [
+        {
+          "country": "AR",
+          "norm_id": "res-57-2026",
+          "article": "18"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q024",
+      "question": "En Colombia, cuando un organismo de inspección acreditado va a dictaminar sobre una subestación eléctrica ya construida, ¿qué aspectos técnicos debe revisar y qué debe consignar en su informe final?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "El organismo debe verificar aspectos como tensiones de paso, contacto y transferidas, sujeción y ventilación de equipos, selección de conductores y protecciones contra sobrecorrientes, tiempos de despeje de fallas, protección contra rayos y contra arcos internos, protección contra electrocución por contacto directo e indirecto, resistencia de puesta a tierra y de aislamiento, equipotencialidad, estructuras y herrajes, identificación de circuitos, y revisión de planos y certificaciones de producto. Con base en esto debe emitir un dictamen de 'Aprobada' o 'No Aprobada', identificando a los responsables y firmando junto con los datos del organismo de inspección.",
+      "citations": [
+        {
+          "country": "CO",
+          "norm_id": "res-9703",
+          "article": "32"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q025",
+      "question": "En Argentina, si tengo un certificado de producto vigente emitido bajo el reglamento técnico que fue reemplazado por la Res. 16/2025, ¿puedo seguir usándolo o tengo que recertificar de inmediato?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "El certificado emitido bajo el reglamento derogado mantiene su vigencia por hasta un (1) año desde la entrada en vigencia de la nueva resolución, debiendo cumplirse las vigilancias que correspondan durante ese período. Una vez vencido ese plazo, el fabricante o importador deberá realizar las adecuaciones necesarias para ajustarse a la nueva norma, si correspondiere.",
+      "citations": [
+        {
+          "country": "AR",
+          "norm_id": "res-16-2025",
+          "article": "9"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q026",
+      "question": "En Colombia, para un sistema de iluminación de emergencia instalado en un local, ¿qué controles periódicos hay que hacer y cómo se deben documentar para cumplir con la norma?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "Se debe verificar mensualmente el funcionamiento del conjunto de la luminaria (incluyendo red y fallo de carga), y trimestralmente repetir esa verificación pero durante toda la autonomía asignada según datos del fabricante. Ambas verificaciones son obligatorias y deben registrarse en un Libro de Registro de Informes a cargo de un responsable designado por el propietario o tenedor del local, con fechas, descripción, defectos hallados, correcciones realizadas y modificaciones a la instalación.",
+      "citations": [
+        {
+          "country": "CO",
+          "norm_id": "res-9703",
+          "article": "17"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q027",
+      "question": "Si vendo equipos de telecomunicaciones a través de una plataforma de e-commerce en Argentina, ¿qué dato de habilitación tengo que mostrar en el aviso o publicación del producto, y esta exigencia aplica solo a mi tienda propia o también a los marketplaces que intermedian la venta?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "En cada publicación del producto se debe indicar el número de inscripción en el RAMATEL otorgado por el ENACOM. Esta obligación es exigible tanto a quienes venden en sitios propios como a los titulares de portales que actúan como intermediarios en la venta.",
+      "citations": [
+        {
+          "country": "AR",
+          "norm_id": "res-57-2026",
+          "article": "10"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q028",
+      "question": "En Colombia, si un organismo evaluador de la conformidad incumple sus obligaciones respecto a un producto reglamentado, ¿la SIC puede también sancionar al fabricante o importador de ese producto, o solo actúa contra el organismo evaluador?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "La SIC puede sancionar tanto al organismo evaluador de la conformidad por incumplir sus deberes, como también, de forma independiente, a los productores, fabricantes, ensambladores, importadores, constructores y demás responsables de los productos sujetos al reglamento técnico. Esta es una facultad de la SIC ('podrá'), no una sanción automática ni excluyente entre ambos actores.",
+      "citations": [
+        {
+          "country": "CO",
+          "norm_id": "res-9703",
+          "article": "34"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q029",
+      "question": "En Argentina, si tengo dudas sobre qué normativa de seguridad aplicar a un equipo eléctrico de baja tensión que quiero importar, ¿esta resolución reemplaza a todas las regulaciones anteriores sobre el tema?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "Sí, esta resolución rige todas las cuestiones de seguridad de equipamiento eléctrico de baja tensión y deroga las resoluciones anteriores que fijaban procedimientos o requisitos distintos, listadas en el Anexo III. Sin embargo, ese mismo anexo identifica ciertas resoluciones sobre baja tensión que mantienen su vigencia, por lo que conviene revisar el Anexo III para saber cuáles siguen aplicando.",
+      "citations": [
+        {
+          "country": "AR",
+          "norm_id": "res-92-1998",
+          "article": "5"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q030",
+      "question": "En Colombia, si una empresa de servicios públicos no puede acreditar que su sistema de comunicaciones para coordinar maniobras eléctricas es seguro y confiable, ¿qué protocolo está obligada a usar para las comunicaciones por radio?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "Debe adoptar el Código Q establecido para comunicaciones por radio, según lo dispuesto en el RETIE. Esta es una obligación, no una opción, que aplica cuando la empresa no logra demostrar que su propio sistema de comunicación garantiza seguridad y confiabilidad en las maniobras.",
+      "citations": [
+        {
+          "country": "CO",
+          "norm_id": "res-9703",
+          "article": "4"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q031",
+      "question": "En Argentina, ¿quién define cuánto hay que pagar para inscribirse en el registro de fabricantes/importadores de equipos de telecomunicaciones, en el de agencias de certificación o en el de laboratorios de ensayos, y en base a qué régimen se actualizarían esos valores?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "El ENACOM instruye a sus direcciones competentes a fijar los aranceles de esos tres registros, tomando como base para la actualización el Régimen de Derechos y Aranceles Radioeléctricos de la Resolución 10/95 de la ex Secretaría de Energía, Transporte y Comunicaciones. Es un mandato interno al organismo, no una obligación directa para los administrados.",
+      "citations": [
+        {
+          "country": "AR",
+          "norm_id": "res-57-2026",
+          "article": "14"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q032",
+      "question": "En Colombia, si voy a instalar equipo eléctrico en una planta clasificada como zona con riesgo de gases inflamables (por ejemplo grupo IIA con propano o gasolina), ¿alcanza con que el equipo esté diseñado para esa clasificación o necesito algo adicional que lo acredite?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "No alcanza solo con el diseño: el artículo establece que los productos destinados a operar en ambientes peligrosos deben estar diseñados y fabricados para uso seguro en esas áreas clasificadas, con instalación y mantenimiento adecuados, y además deben demostrar esa condición mediante un certificado de producto. También el equipo debe estar marcado indicando su temperatura o rango de temperatura de operación.",
+      "citations": [
+        {
+          "country": "CO",
+          "norm_id": "res-9703",
+          "article": "27"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q033",
+      "question": "En Argentina, si soy importador de los productos incluidos en esta normativa, ¿qué debo hacer para acreditar que cumplen con los requisitos exigidos, y es esto obligatorio u opcional?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "Es obligatorio: tanto fabricantes como importadores deben garantizar el cumplimiento de los requisitos mediante una Declaración Jurada de Conformidad, siguiendo el procedimiento de evaluación de la conformidad establecido en el Anexo III y en la parte pertinente de los apéndices del Anexo II.",
+      "citations": [
+        {
+          "country": "AR",
+          "norm_id": "res-16-2025",
+          "article": "3"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q034",
+      "question": "En Colombia, si una empresa va a construir una línea de transmisión de energía eléctrica en corriente alterna con una tensión de 66 kV, ¿qué tipo de certificación debe obtener para esa línea?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "La línea debe contar con una Certificación Plena, utilizando el mecanismo de certificación que esté vigente al momento de iniciar la construcción de la obra.",
+      "citations": [
+        {
+          "country": "CO",
+          "norm_id": "res-9703",
+          "article": "21"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q035",
+      "question": "En Argentina, si mi organismo ya está acreditado por el OAA bajo ISO/IEC 17065 pero para otros esquemas de certificación (no telecomunicaciones), ¿puedo empezar a operar como Agencia de Certificación de Materiales de Telecomunicaciones para ENACOM mientras tramito la acreditación específica en normas técnicas de telecomunicaciones?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "Sí, durante el plazo de un año desde la publicación de la resolución esos organismos pueden solicitar un reconocimiento provisorio de ENACOM, sin necesidad de contar aún con la acreditación en normas técnicas de telecomunicaciones, siempre que cumplan los demás requisitos del reglamento. Ese reconocimiento provisorio dura un año, plazo en el cual deberán adecuarse íntegramente al reglamento, incluyendo la acreditación específica en telecomunicaciones.",
+      "citations": [
+        {
+          "country": "AR",
+          "norm_id": "res-57-2026",
+          "article": "7"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q036",
+      "question": "En Colombia, dentro del marco del RETIE, ¿quiénes tienen responsabilidades definidas respecto al cumplimiento de las instalaciones eléctricas y sus componentes, y qué se busca evitar en la información que reciben los usuarios?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "El RETIE establece responsabilidades para diseñadores, constructores, interventores, operadores, inspectores, propietarios y usuarios de instalaciones eléctricas, así como para fabricantes, importadores, distribuidores, organismos de inspección y certificación, y laboratorios de pruebas. Además, busca prevenir que se induzca a error a los usuarios mediante indicaciones incorrectas, falsas o la omisión de las exigencias del reglamento.",
+      "citations": [
+        {
+          "country": "CO",
+          "norm_id": "res-9703",
+          "article": "1"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q037",
+      "question": "En Colombia, para instalaciones eléctricas, ¿hasta qué nivel de campo eléctrico y magnético se puede exponer a un trabajador durante una jornada laboral de ocho horas según el reglamento técnico aplicable?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "El artículo establece que, para exposición ocupacional en una jornada de ocho horas, el límite de intensidad de campo eléctrico es de 8,3 kV/m y el de densidad de flujo magnético es de 1000 µT; estos son los valores máximos permitidos, no debiendo superarse.",
+      "citations": [
+        {
+          "country": "CO",
+          "norm_id": "res-9703",
+          "article": "14"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q038",
+      "question": "En Colombia, antes de energizar nuevamente un circuito eléctrico intervenido, ¿cómo debe verificarse y garantizarse que no queda tensión residual peligrosa en la zona de trabajo?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "Debe comprobarse la ausencia de tensión en cada fase usando un detector de tensión apropiado al nivel nominal de la red, probado antes y después de su uso. Además, hay que poner a tierra y en cortocircuito todas las posibles fuentes de tensión con un puente equipotencial conectado previamente a tierra, ya que mientras esto no se complete, los conductores se consideran energizados a su tensión nominal.",
+      "citations": [
+        {
+          "country": "CO",
+          "norm_id": "res-9703",
+          "article": "18"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q039",
+      "question": "En Colombia, si voy a instalar equipos eléctricos en una zona clasificada como peligrosa (por ejemplo con presencia de gases o polvos combustibles), ¿qué documento debo exigir al proveedor para acreditar que el producto es apto para ese entorno?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "El artículo establece que los productos eléctricos destinados a operar en ambientes clasificados como peligrosos deben demostrar su condición de uso seguro mediante un certificado de producto, el cual debe señalar la aplicación para la que fue certificado y la norma que le aplica. Además, deben cumplir con la instalación y mantenimiento adecuados.",
+      "citations": [
+        {
+          "country": "CO",
+          "norm_id": "res-40117-2024",
+          "article": "3"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q040",
+      "question": "En Colombia, si en un mismo poste voy a instalar conductores agrupados en haz con espaciadores para una red de media tensión de hasta 15 kV, ¿qué separación mínima debo respetar entre esos conductores?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "Según la Resolución 9703, para conductores agrupados en haz con aisladores tipo espaciador, la distancia entre conductores no debe ser menor a 27 cm cuando la tensión llega hasta 15 kV. Si la tensión está entre 15 kV y 34,5 kV, la separación mínima exigida es de 46 cm.",
+      "citations": [
+        {
+          "country": "CO",
+          "norm_id": "res-9703",
+          "article": "13"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q041",
+      "question": "En Colombia, si una empresa de telecomunicaciones quiere instalar sus cables compartiendo los postes de la red eléctrica, ¿qué debe garantizar para cumplir con la normativa eléctrica?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "Debe garantizar la disponibilidad de espacios y cumplir los procedimientos seguros de montaje, adecuación, operación y mantenimiento tanto de su infraestructura como de la eléctrica. Además, debe asegurar que los esfuerzos mecánicos generados en cada estructura de soporte (por el peso de cables, equipos y otras cargas) cumplan las exigencias del RETIE en las etapas de diseño, construcción, operación y mantenimiento.",
+      "citations": [
+        {
+          "country": "CO",
+          "norm_id": "res-9703",
+          "article": "24"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "q042",
+      "question": "Estoy por certificar un lote de cables conductores ACSR en Colombia, ¿esta parte de la resolución 9703 establece obligaciones de trámite o solo contiene valores técnicos de referencia para los conductores?",
+      "kind": "factual",
+      "answerable": true,
+      "expected_answer": "El artículo 20 no fija obligaciones ni trámites de certificación; se limita a presentar una tabla de valores técnicos de conductores (secciones, diámetros, formación de hilos y otros parámetros numéricos) que sirven como referencia de especificación, sin indicar que deban o puedan cumplirse pasos administrativos adicionales.",
+      "citations": [
+        {
+          "country": "CO",
+          "norm_id": "res-9703",
+          "article": "20"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Revisar y reescribir con tus palabras."
+    },
+    {
+      "id": "t001",
+      "question": "¿Cuál es el procedimiento vigente en México para obtener el certificado NOM de productos eléctricos de baja tensión ante una entidad de certificación acreditada por la EMA?",
+      "kind": "trap",
+      "answerable": false,
+      "expected_answer": "El corpus no incluye ningún documento correspondiente a México (NOM, EMA), solo cubre normativa de Argentina, Chile, Colombia, Perú, Paraguay y Uruguay, por lo que no contiene información sobre el trámite mexicano.",
+      "citations": [],
+      "status": "draft",
+      "notes": "Generado automáticamente. Confirmá que de verdad no esté en el corpus."
+    },
+    {
+      "id": "t002",
+      "question": "¿Cuáles son los requisitos específicos de etiquetado energético para refrigeradores domésticos según la normativa mexicana NOM-015-ENER vigente?",
+      "kind": "trap",
+      "answerable": false,
+      "expected_answer": "El corpus no incluye ninguna normativa de México (NOM), solo cubre Argentina, Chile, Colombia, Perú, Paraguay y Uruguay, por lo que no puede responder sobre requisitos de etiquetado energético mexicanos.",
+      "citations": [],
+      "status": "draft",
+      "notes": "Generado automáticamente. Confirmá que de verdad no esté en el corpus."
+    },
+    {
+      "id": "t003",
+      "question": "Según la normativa uruguaya de productos eléctricos, ¿cuál es el procedimiento específico para certificar cargadores de vehículos eléctricos y qué organismo emite el certificado de conformidad en ese trámite?",
+      "kind": "trap",
+      "answerable": false,
+      "expected_answer": "El corpus solo incluye 8 fragmentos genéricos de 'UY productos-electricos' sin detalle sobre procedimientos específicos de certificación de cargadores de vehículos eléctricos ni sobre el organismo certificador correspondiente.",
+      "citations": [],
+      "status": "draft",
+      "notes": "Generado automáticamente. Confirmá que de verdad no esté en el corpus."
+    },
+    {
+      "id": "t004",
+      "question": "¿Cuáles son los requisitos específicos de etiquetado de eficiencia energética para refrigeradores domésticos según la normativa mexicana NOM-015-ENER vigente?",
+      "kind": "trap",
+      "answerable": false,
+      "expected_answer": "El corpus no incluye ninguna normativa de México (solo cubre Argentina, Chile, Colombia, Perú, Paraguay y Uruguay), por lo que no puede responder sobre requisitos de la NOM mexicana.",
+      "citations": [],
+      "status": "draft",
+      "notes": "Generado automáticamente. Confirmá que de verdad no esté en el corpus."
+    },
+    {
+      "id": "t005",
+      "question": "Según la resolución CO res-40117-2024, ¿cuáles son los requisitos específicos de etiquetado energético para refrigeradores domésticos que se comercializan en Ecuador?",
+      "kind": "trap",
+      "answerable": false,
+      "expected_answer": "El corpus no incluye ninguna norma ni resolución correspondiente a Ecuador, por lo que no puede responder sobre requisitos regulatorios de ese país, aunque sí contenga regulaciones colombianas similares en tema y formato.",
+      "citations": [],
+      "status": "draft",
+      "notes": "Generado automáticamente. Confirmá que de verdad no esté en el corpus."
+    },
+    {
+      "id": "t006",
+      "question": "Según la Resolución CO 9703, ¿cuáles son los requisitos específicos de etiquetado energético para refrigeradores domésticos que se comercializan en Ecuador?",
+      "kind": "trap",
+      "answerable": false,
+      "expected_answer": "El corpus solo contiene normativa de Colombia, Argentina, Chile, Perú, Paraguay y Uruguay, pero no incluye ninguna resolución ni norma técnica de Ecuador, por lo que no puede responder sobre requisitos de etiquetado energético aplicables en ese país.",
+      "citations": [],
+      "status": "draft",
+      "notes": "Generado automáticamente. Confirmá que de verdad no esté en el corpus."
+    },
+    {
+      "id": "t007",
+      "question": "¿Cuáles son los requisitos específicos de etiquetado y certificación para paneles solares fotovoltaicos que establece la resolución de Bolivia sobre eficiencia energética, y qué organismo boliviano acredita a los laboratorios de ensayo?",
+      "kind": "trap",
+      "answerable": false,
+      "expected_answer": "El corpus no incluye ninguna normativa ni resolución de Bolivia (solo cubre Argentina, Chile, Colombia, Perú, Paraguay y Uruguay), por lo que no puede responder preguntas sobre requisitos de certificación o etiquetado de productos en ese país.",
+      "citations": [],
+      "status": "draft",
+      "notes": "Generado automáticamente. Confirmá que de verdad no esté en el corpus."
+    },
+    {
+      "id": "t008",
+      "question": "¿Cuál es el procedimiento y los plazos vigentes para la certificación de eficiencia energética de electrodomésticos en México según la NOM correspondiente?",
+      "kind": "trap",
+      "answerable": false,
+      "expected_answer": "El corpus no incluye ninguna normativa de México (NOM) ni documentos sobre eficiencia energética de electrodomésticos, ya que solo cubre regulaciones de Argentina, Chile, Colombia, Perú, Paraguay y Uruguay.",
+      "citations": [],
+      "status": "draft",
+      "notes": "Generado automáticamente. Confirmá que de verdad no esté en el corpus."
+    },
+    {
+      "id": "t009",
+      "question": "¿Cuáles son los requisitos específicos de etiquetado energético para refrigeradores domésticos según la normativa mexicana NOM-015-ENER vigente?",
+      "kind": "trap",
+      "answerable": false,
+      "expected_answer": "El corpus no incluye ninguna normativa de México (solo cubre Argentina, Chile, Colombia, Perú, Paraguay y Uruguay), por lo que no contiene información sobre la NOM-015-ENER ni sobre requisitos de etiquetado energético mexicanos.",
+      "citations": [],
+      "status": "draft",
+      "notes": "Generado automáticamente. Confirmá que de verdad no esté en el corpus."
+    },
+    {
+      "id": "t010",
+      "question": "Según la normativa mexicana equivalente a la NOM-001-SCFI, ¿cuáles son los requisitos de etiquetado de eficiencia energética para refrigeradores domésticos que se comercializan en México?",
+      "kind": "trap",
+      "answerable": false,
+      "expected_answer": "El corpus no incluye ninguna normativa de México (solo cubre Argentina, Chile, Colombia, Perú, Paraguay y Uruguay), por lo que no contiene información sobre la NOM-001-SCFI ni sobre requisitos de etiquetado energético mexicanos.",
+      "citations": [],
+      "status": "draft",
+      "notes": "Generado automáticamente. Confirmá que de verdad no esté en el corpus."
+    },
+    {
+      "id": "t011",
+      "question": "¿Cuál es el procedimiento vigente en Bolivia para certificar la seguridad eléctrica de electrodomésticos, y qué norma boliviana sería equivalente a la argentina res-92-1998?",
+      "kind": "trap",
+      "answerable": false,
+      "expected_answer": "El corpus no incluye ningún documento correspondiente a Bolivia, por lo que no hay información sobre normas, resoluciones o procedimientos de certificación eléctrica en ese país.",
+      "citations": [],
+      "status": "draft",
+      "notes": "Generado automáticamente. Confirmá que de verdad no esté en el corpus."
+    },
+    {
+      "id": "t012",
+      "question": "¿Cuáles son los requisitos específicos de etiquetado energético para refrigeradores domésticos establecidos en la normativa boliviana vigente?",
+      "kind": "trap",
+      "answerable": false,
+      "expected_answer": "El corpus no incluye ningún documento normativo de Bolivia, solo cubre Argentina, Chile, Colombia, Perú, Paraguay y Uruguay, por lo que no puede responder sobre requisitos de etiquetado energético en ese país.",
+      "citations": [],
+      "status": "draft",
+      "notes": "Generado automáticamente. Confirmá que de verdad no esté en el corpus."
+    },
+    {
+      "id": "q043",
+      "question": "Para un fabricante que quiere certificar equipamiento eléctrico tanto en Argentina como en Colombia, ¿alcanza con obtener un solo tipo de certificación válida en ambos mercados, o cada país exige un esquema propio con requisitos distintos?",
+      "kind": "synthesis",
+      "answerable": true,
+      "expected_answer": "Ambos artículos coinciden en que la conformidad de un producto eléctrico debe demostrarse mediante certificación basada en ensayos técnicos, otorgada o soportada por organismos/laboratorios reconocidos oficialmente, lo cual implica que ningún país acepta autodeclaración simple sin respaldo técnico. Sin embargo, los esquemas no son equivalentes ni intercambiables: en Argentina (res-92-1998) la certificación la otorga un organismo acreditado por el OAA, se rige por un procedimiento y plazos fijados en un anexo específico, y se cumple si se satisfacen normas IRAM o IEC, culminando en un sello indeleble sobre el producto. En Colombia (res-40117-2024) el RETIE prevé múltiples esquemas de certificación alternativos (no uno solo), exige cumplir requisitos generales y particulares de producto según el Libro 2, y requiere que la certificación esté soportada por ensayos y mediciones de laboratorios que cumplan con lo establecido en otro artículo del reglamento (4.2.4), sin mencionar un sello físico como el argentino. Los textos no permiten concluir que exista reconocimiento mutuo entre ambos sistemas, ni que una certificación obtenida en un país sea válida automáticamente en el otro: cada fabricante debe tramitar el esquema correspondiente en cada jurisdicción.",
+      "citations": [
+        {
+          "country": "AR",
+          "norm_id": "res-92-1998",
+          "article": "3"
+        },
+        {
+          "country": "CO",
+          "norm_id": "res-40117-2024",
+          "article": "4"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Verificá que de verdad haga falta comparar ambos artículos para responder."
+    },
+    {
+      "id": "q044",
+      "question": "Si quiero comercializar el mismo equipo eléctrico tanto en Argentina como en Colombia, ¿qué exige cada país en materia de certificación de seguridad y qué actores de la cadena quedan obligados a cumplir con eso?",
+      "kind": "synthesis",
+      "answerable": true,
+      "expected_answer": "Los dos marcos comparten la idea de fijar requisitos esenciales de seguridad para productos eléctricos y de involucrar a fabricantes, importadores y distribuidores en su cumplimiento, apoyándose en organismos de certificación. Difieren en el nivel de detalle disponible en los fragmentos: el texto argentino (res-92-1998) es específico sobre el mecanismo -certificación otorgada por un organismo acreditado por el OAA, cumplimiento de normas IRAM o IEC, y un sello indeleble visible en el producto certificado-, mientras que el texto colombiano (res-9703, RETIE) enumera de forma más amplia a los responsables de la cadena eléctrica (diseñadores, constructores, interventores, operadores, propietarios, usuarios, laboratorios, organismos de certificación) y objetivos generales como confiabilidad, compatibilidad y prevención de prácticas engañosas, pero no detalla en este fragmento un procedimiento de certificación ni un sello o marca equivalente al argentino. No puede concluirse de estos artículos que exista reconocimiento mutuo entre ambos países, ni que el mecanismo de sello argentino tenga un correlato idéntico en el esquema colombiano, ni los plazos o el organismo de acreditación equivalente al OAA en Colombia, ya que esa información no figura en el fragmento citado.",
+      "citations": [
+        {
+          "country": "AR",
+          "norm_id": "res-92-1998",
+          "article": "3"
+        },
+        {
+          "country": "CO",
+          "norm_id": "res-9703",
+          "article": "1"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Verificá que de verdad haga falta comparar ambos artículos para responder."
+    },
+    {
+      "id": "q045",
+      "question": "Si tengo certificados vigentes bajo el esquema anterior en Argentina y en Colombia, ¿qué plazo de transición aplica en cada país y qué debo hacer una vez vencido ese plazo para seguir comercializando el producto en ambos mercados?",
+      "kind": "synthesis",
+      "answerable": true,
+      "expected_answer": "Ambos países contemplan un régimen transitorio para certificados emitidos bajo la normativa anterior, permitiendo su vigencia temporal antes de exigir el cumplimiento pleno del nuevo esquema. En Argentina, el artículo 9° de la res-16-2025 establece que los certificados emitidos bajo el reglamento derogado mantienen validez por hasta UN (1) año desde la entrada en vigencia de la nueva resolución, debiendo cumplirse las vigilancias correspondientes durante ese lapso; vencido el plazo, fabricantes e importadores deben realizar las adecuaciones necesarias. En Colombia, el artículo 36 de la res-9703 (RETIE) fija un plazo distinto y específico de SEIS meses para que sean exigibles los nuevos certificados de productos puntuales (cargadores de baterías EV, duchas/calentadores eléctricos, transferencias automáticas, relés térmicos, reconectadores de media tensión, crucetas, arrancadores de motores), aceptando durante ese período los productos fabricados o importados con certificación previa; además prevé un plazo adicional de TRES meses, contado desde la acreditación, para productos no cubiertos por organismos certificadores acreditados. La diferencia clave está en la duración del plazo transitorio (1 año en Argentina vs. 6 meses, con una excepción de 3 meses, en Colombia) y en que el texto colombiano es más específico al listar los productos afectados, mientras que el argentino aplica de manera más general a 'los productos alcanzados' por el reglamento derogado. Los artículos NO permiten concluir si existen sanciones específicas por incumplimiento del plazo, ni si los organismos de certificación deben re-acreditarse formalmente en Colombia (solo se menciona la adecuación de alcances en Argentina), ni si ambos regímenes son extensibles o prorrogables en casos particulares.",
+      "citations": [
+        {
+          "country": "AR",
+          "norm_id": "res-16-2025",
+          "article": "9"
+        },
+        {
+          "country": "CO",
+          "norm_id": "res-9703",
+          "article": "36"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Verificá que de verdad haga falta comparar ambos artículos para responder."
+    },
+    {
+      "id": "q046",
+      "question": "Si una empresa ya cuenta con certificados vigentes en Argentina bajo el esquema anterior y quiere certificar el mismo producto eléctrico en Colombia bajo el nuevo reglamento, ¿qué dice cada país sobre la continuidad de esos certificados previos y el reconocimiento de los organismos que ya evaluaban el producto?",
+      "kind": "synthesis",
+      "answerable": true,
+      "expected_answer": "Solo el texto argentino aborda ese punto: establece que los certificados emitidos bajo el régimen anterior siguen siendo válidos por hasta un año desde que entra en vigor la nueva norma (con las vigilancias que correspondan), y que los organismos de certificación y laboratorios ya reconocidos conservan su estatus mientras se adaptan a los nuevos esquemas. El texto colombiano, en cambio, no trata la transición desde una norma previa ni la situación de organismos ya reconocidos: se limita a fijar los requisitos generales que debe cumplir cualquier certificación de producto (evidencias, ensayos, uso de laboratorios y elección de un esquema entre los previstos). Por lo tanto, con estos artículos no se puede concluir que Colombia ofrezca un período de gracia similar al argentino ni que reconozca automáticamente certificaciones o laboratorios previos; eso simplemente no está cubierto en el fragmento colombiano, y no debe inferirse una equivalencia entre ambos regímenes en materia de transición.",
+      "citations": [
+        {
+          "country": "AR",
+          "norm_id": "res-16-2025",
+          "article": "9"
+        },
+        {
+          "country": "CO",
+          "norm_id": "res-40117-2024",
+          "article": "4"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Verificá que de verdad haga falta comparar ambos artículos para responder."
+    },
+    {
+      "id": "q047",
+      "question": "Si una empresa certificadora ya acreditada quiere operar tanto en Argentina como en Colombia durante el período de transición hacia un nuevo esquema reglamentario, ¿qué plazos y condiciones provisorias le aplicarían en cada país y puede asumir que el mecanismo funciona igual en ambos casos?",
+      "kind": "synthesis",
+      "answerable": true,
+      "expected_answer": "Los dos artículos comparten la lógica de dar un período transitorio a organismos o productos que ya contaban con alguna acreditación o certificación previa, evitando que queden automáticamente fuera del nuevo esquema. Sin embargo, difieren en el objeto y en el mecanismo: en Argentina el artículo habilita a empresas ya acreditadas en otros esquemas de certificación de productos a solicitar un reconocimiento provisorio como agencia certificadora de materiales de telecomunicaciones, con una duración de un año desde su otorgamiento, tras el cual deben cumplir el reglamento completo, incluida la acreditación en normas técnicas específicas del sector. En Colombia, en cambio, la transitoriedad no recae sobre organismos certificadores sino sobre productos eléctricos puntuales (cargadores, duchas, transferencias automáticas, etc.), a los que se les da un plazo de seis meses desde la publicación del anexo para exigirles el nuevo certificado, aceptando entretanto los certificados obtenidos bajo la norma anterior; además prevé un plazo distinto (tres meses) para productos sin organismo certificador acreditado. No se puede concluir de los textos que ambos países usen el mismo criterio temporal, que el mecanismo argentino aplique a productos ni que el colombiano aplique a organismos certificadores, ni que los plazos (un año vs. seis o tres meses) sean equivalentes o intercambiables entre los dos sistemas.",
+      "citations": [
+        {
+          "country": "AR",
+          "norm_id": "res-57-2026",
+          "article": "7"
+        },
+        {
+          "country": "CO",
+          "norm_id": "res-9703",
+          "article": "36"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Verificá que de verdad haga falta comparar ambos artículos para responder."
+    },
+    {
+      "id": "q048",
+      "question": "Si una empresa de certificación ya acreditada bajo ISO/IEC 17065 en otro rubro quiere ampliar su alcance para poder certificar productos de telecomunicaciones en Argentina y productos eléctricos en Colombia, ¿existe en ambos países un mecanismo de reconocimiento transitorio que le permita operar mientras completa los requisitos técnicos específicos del sector?",
+      "kind": "synthesis",
+      "answerable": true,
+      "expected_answer": "Los dos textos comparten la idea de que la conformidad de un producto debe demostrarse a través de un organismo o esquema de certificación formalmente reconocido, y ambos parten de una acreditación base (en el caso argentino, ISO/IEC 17065). La diferencia central es que el artículo argentino sí prevé explícitamente un mecanismo transitorio: una empresa ya acreditada en otros esquemas bajo ISO/IEC 17065 puede pedir un reconocimiento provisorio de un año como Agencia de Certificación de Materiales de Telecomunicaciones, sin necesitar aún la acreditación específica en normas técnicas de telecomunicaciones, pero debiendo regularizarse al cabo de ese año. El artículo colombiano, en cambio, no menciona ningún reconocimiento provisorio ni plazo de adecuación para organismos certificadores: solo establece qué esquemas de certificación son válidos para demostrar conformidad de productos eléctricos bajo el RETIE y exige que esa certificación esté respaldada por ensayos de laboratorio conforme a otro artículo del reglamento. Por lo tanto, no puede concluirse de estos textos que Colombia ofrezca una vía transitoria equivalente a la argentina para organismos que buscan ampliar su alcance de acreditación; el artículo colombiano simplemente no aborda ese punto, por lo que la respuesta a si existe tal mecanismo en Colombia queda indeterminada con la información disponible.",
+      "citations": [
+        {
+          "country": "AR",
+          "norm_id": "res-57-2026",
+          "article": "7"
+        },
+        {
+          "country": "CO",
+          "norm_id": "res-40117-2024",
+          "article": "4"
+        }
+      ],
+      "status": "draft",
+      "notes": "Generado automáticamente. Verificá que de verdad haga falta comparar ambos artículos para responder."
+    }
+  ]
+}
