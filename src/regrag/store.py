@@ -1,14 +1,24 @@
 """Postgres + pgvector storage and dense retrieval."""
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from typing import Any
 
 import psycopg
 from psycopg.rows import class_row
 
+from regrag.fusion import DEFAULT_K, reciprocal_rank_fusion
+
+# How many candidates each retriever contributes per requested result.
+CANDIDATE_FACTOR = 5
+
 # voyage-3 embedding width. Kept as a parameter rather than baked into the DDL
 # so tests can use a small, hand-checkable dimension.
 EMBEDDING_DIM = 1024
+
+# Spanish stemming and stopwords: "producto importado" should match "los
+# productos importados", and "de la" should not be a search term. Standard and
+# document numbers survive stemming untouched, which is the point.
+TEXT_SEARCH_CONFIG = "spanish"
 
 
 @dataclass(frozen=True)
@@ -41,14 +51,32 @@ def create_schema(conn: psycopg.Connection, dim: int = EMBEDDING_DIM) -> None:
                 strategy  TEXT        NOT NULL,
                 idx       INTEGER     NOT NULL,
                 n_chars   INTEGER     NOT NULL,
-                embedding vector({dim}) NOT NULL
+                embedding vector({dim}) NOT NULL,
+                -- Generated, not maintained: a tsvector written by application
+                -- code drifts out of sync with the text the moment one write
+                -- path forgets to update it, and the symptom is a chunk that
+                -- silently stops being findable. Postgres keeps this current.
+                tsv tsvector GENERATED ALWAYS AS
+                    (to_tsvector('{TEXT_SEARCH_CONFIG}', text)) STORED
             )
             """
         )
+        # CREATE TABLE IF NOT EXISTS is a no-op on a table that already exists,
+        # so a column added to the DDL above never reaches a database created
+        # before it — and the only symptom is lexical search quietly returning
+        # nothing. Add it explicitly for databases that predate it.
+        cur.execute(
+            f"""
+            ALTER TABLE chunks ADD COLUMN IF NOT EXISTS tsv tsvector
+            GENERATED ALWAYS AS (to_tsvector('{TEXT_SEARCH_CONFIG}', text)) STORED
+            """
+        )
+
         # Metadata filters are what make "how does AR differ from CL?" answerable,
         # so they get indexes alongside the vector.
         cur.execute("CREATE INDEX IF NOT EXISTS chunks_country ON chunks (country)")
         cur.execute("CREATE INDEX IF NOT EXISTS chunks_norm ON chunks (norm_id)")
+        cur.execute("CREATE INDEX IF NOT EXISTS chunks_tsv ON chunks USING GIN (tsv)")
 
 
 # Below this many rows an exact scan is fast enough that an approximate index
@@ -140,6 +168,70 @@ def upsert_chunks(
             rows,
         )
     return len(rows)
+
+
+def search_lexical(
+    conn: psycopg.Connection,
+    query: str,
+    limit: int = 10,
+    country: str | None = None,
+) -> list[SearchResult]:
+    """Full-text search, ranked by ts_rank.
+
+    This is the half of retrieval that can tell IEC 60364 from IEC 60335. An
+    embedding compresses meaning, and a standard number has no meaning to
+    compress — the digits are the entire query.
+    """
+    if not query.strip():
+        return []
+
+    with conn.cursor(row_factory=class_row(SearchResult)) as cur:
+        cur.execute(
+            f"""
+            SELECT chunk_id, text, country, agency, norm_id, variant, year, article,
+                   ts_rank(tsv, q) AS score
+            FROM chunks, websearch_to_tsquery('{TEXT_SEARCH_CONFIG}', %(q)s) AS q
+            WHERE tsv @@ q
+              AND (%(country)s::text IS NULL OR country = %(country)s)
+            ORDER BY score DESC
+            LIMIT %(limit)s
+            """,
+            {"q": query, "country": country, "limit": limit},
+        )
+        return cur.fetchall()
+
+
+def search_hybrid(
+    conn: psycopg.Connection,
+    query_embedding: list[float],
+    query_text: str,
+    limit: int = 10,
+    country: str | None = None,
+    candidate_factor: int = CANDIDATE_FACTOR,
+    k: int = DEFAULT_K,
+) -> list[SearchResult]:
+    """Dense and lexical retrieval, fused by rank.
+
+    The two retrievers fail in different places, and neither failure is visible
+    from inside the other: embeddings cannot tell IEC 60364 from IEC 60335, and
+    full-text search cannot connect "rotulado" to "marcado". Fusing by position
+    needs no shared score scale and no per-retriever weight to tune.
+    """
+    # Each retriever contributes more candidates than the caller asked for.
+    # Fusing only the top-`limit` of each would throw away exactly the results
+    # that win on combined support rather than on either ranking alone.
+    pool = max(limit * candidate_factor, limit)
+    dense = search_dense(conn, query_embedding, limit=pool, country=country)
+    lexical = search_lexical(conn, query_text, limit=pool, country=country)
+
+    by_id = {hit.chunk_id: hit for hit in [*dense, *lexical]}
+    fused = reciprocal_rank_fusion(
+        [[h.chunk_id for h in dense], [h.chunk_id for h in lexical]],
+        k=k,
+        limit=limit,
+    )
+    # The fused score replaces each retriever's own, which are not comparable.
+    return [replace(by_id[cid], score=score) for cid, score in fused]
 
 
 def existing_chunk_ids(conn: psycopg.Connection) -> set[str]:

@@ -16,11 +16,12 @@ FastAPI, ragas.
 ```bash
 uv sync
 docker compose up -d                         # Postgres 17 + pgvector
-uv run pytest                                # 85 tests
+uv run pytest                                # 123 tests
 uv run python scripts/ingest_corpus.py       # corpus -> data/processed/*.jsonl
 uv run python scripts/index_corpus.py        # embed + load into Postgres
 uv run python scripts/search.py "¿qué exige el artículo 4 sobre marcado?"
-uv run python scripts/diagnose_dense.py      # retrieval quality baseline
+uv run python scripts/search.py --mode dense "IEC 60364"   # or lexical / hybrid
+uv run python scripts/diagnose_retrieval.py  # dense vs lexical vs hybrid
 ```
 
 Corpus documents are not committed (see `data/sources.md` for provenance and
@@ -132,6 +133,53 @@ is one clause inside dense legal text. In compliance the form template is
 useless and the article is the answer, so this ranking is backwards in the way
 that matters most.
 
+### Hybrid retrieval: dense and lexical, fused by rank
+
+Postgres full-text search over the same table (a `tsvector` column with Spanish
+stemming, GIN-indexed), fused with the vector results by Reciprocal Rank Fusion.
+
+| Probe type | Dense | Lexical | **Hybrid** |
+|---|---|---|---|
+| Identifiers (`IEC 60364`, `RESOL-2025-16-APN-SIYC#MEC`) | 6/9 | 9/9 | **9/9** |
+| Verbatim phrases (`declaración jurada de conformidad`) | 6/8 | 8/8 | **8/8** |
+| Paraphrases (`penalidades` → *sanciones*) | 5/5 | 2/5 | **5/5** |
+| **Total recall@10** | **17/22** | **19/22** | **22/22** |
+
+**Neither retriever alone is sufficient, and they fail in places the other
+cannot see.** Dense search misses `IEC 60364` entirely — not one of its top five
+results contains the string — because an embedding of a standard number is not
+meaningfully distinct from an embedding of the adjacent standard, and the digits
+are the whole query. Lexical search misses "penalidades por incumplimiento"
+because the corpus says *sanciones*, and no amount of stemming bridges two
+different words.
+
+**The paraphrase row is there to stop the comparison being rigged.** Every probe
+in the first two categories is a string lifted verbatim from the corpus, which
+is exactly what full-text search is built for: measured on those alone, lexical
+ties hybrid at 17/17 and the vectors look like dead weight. The paraphrase probes
+use wording that appears **nowhere** in the corpus, paired with the term the
+corpus actually uses, so lexical must fail by construction. That is the only
+category in this harness that can show what dense retrieval contributes.
+
+**Why RRF rather than blending the scores.** Cosine similarity and `ts_rank` are
+not on a common scale — 0.5 from one means nothing in terms of the other — so
+they cannot be averaged, normalised, or thresholded against each other in any
+principled way. Rank position is the one output both produce that *is*
+comparable. RRF scores a result as Σ 1/(k + rank) across rankings, with k = 60:
+large enough that the gap between rank 1 and rank 5 is small, so a result both
+retrievers found outranks one that placed first in a single list. No
+per-retriever weight to tune, and adding a third retriever later needs no
+recalibration.
+
+Two implementation details that matter:
+
+- **The candidate pool is wider than the requested limit** (5× by default).
+  Fusing only the top-`limit` of each ranker discards precisely the results that
+  win on combined support rather than on either ranking alone.
+- **Ties break deterministically, on chunk id.** With two rankers, ties are
+  common — both rank-1 results score exactly 1/61 — and an arbitrary order would
+  make identical runs return different answers.
+
 ### No ANN index at this corpus size
 
 pgvector warned `ivfflat index created with little data`, so the index was
@@ -192,6 +240,8 @@ why they all carry tests.
 | Stale IVFFlat index | An IVFFlat index stores centroids from the data present when it was built. Built before a load — or left in place across a `TRUNCATE` — it describes data that is no longer there. Measured here: **0/10** recall, no warning. `CREATE INDEX IF NOT EXISTS` is the wrong statement; the index must be dropped and rebuilt. |
 | Wrong embedding `input_type` | Voyage embeds queries and documents asymmetrically. Sending a question with `input_type="document"` returns a perfectly valid, worse vector. The symptom is degraded recall, never an exception. |
 | Per-request batch cap | Voyage's document cap only errors at scale, so a batching bug ships clean from a five-chunk development run. |
+| `CREATE TABLE IF NOT EXISTS` on an evolved schema | A no-op against a table that already exists, so the `tsvector` column added for full-text search never reaches a database created before it. Lexical search then returns nothing, on a corpus sitting right there, with no error. `create_schema` adds the column explicitly for older databases. |
+| A hand-maintained `tsvector` | Kept in sync by application code, it drifts the moment one write path forgets to update it, and the affected chunk silently stops being findable. It is a `GENERATED ALWAYS` column so Postgres owns it. |
 
 ## Known limitations
 
@@ -208,7 +258,12 @@ why they all carry tests.
   still sit above cosine 0.9. Near-duplicate collapsing is not implemented, and
   is a judgement call rather than an obvious win: those chunks are not the same
   text, so merging them would discard content.
-- Everything is measured on 17 probes. That is enough to establish a direction
-  and not enough to be precise about it; the Day-6 golden set replaces it.
+- Everything is measured on 22 probes, and the harness answers "is the chunk
+  containing this string in the top 10?" — not "is the retrieved article the one
+  that answers the question?". That is enough to establish a direction and not
+  enough to be precise about it; the golden set of real compliance questions,
+  with human-verified answers, replaces it.
+- `k = 60` and a 5× candidate pool are the conventional defaults, carried over
+  untested. Both are tunable against the golden set once it exists.
 - 13 source documents against a target of 30–60. Four downloads are blocked at
   the network level from the VPS (see `data/sources.md`).
