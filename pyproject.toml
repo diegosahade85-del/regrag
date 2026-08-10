@@ -7,7 +7,9 @@ requires-python = ">=3.12"
 dependencies = [
     "anthropic>=0.121.0",
     "pydantic>=2.13.4",
+    "pymupdf>=1.28.2",
     "python-dotenv>=1.2.2",
+    "selectolax>=0.4.11",
 ]
 
 [project.scripts]
@@ -16,3 +18,8 @@ regrag = "regrag:main"
 [build-system]
 requires = ["uv_build>=0.12.3,<0.13.0"]
 build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]
