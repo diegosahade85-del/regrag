@@ -8,7 +8,7 @@ Res. SIC 16/2025 impose on imported power supplies?" with citations to the
 specific article, not a plausible-sounding paraphrase.
 
 **Status:** in development.
-**Stack:** Python, PostgreSQL 17 + pgvector, Voyage AI embeddings, Claude API,
+**Stack:** Python, PostgreSQL 17 + pgvector, Voyage AI embeddings, Claude Sonnet 5,
 FastAPI, ragas.
 
 ## Running it
@@ -16,12 +16,13 @@ FastAPI, ragas.
 ```bash
 uv sync
 docker compose up -d                         # Postgres 17 + pgvector
-uv run pytest                                # 123 tests
+uv run pytest                                # 137 tests
 uv run python scripts/ingest_corpus.py       # corpus -> data/processed/*.jsonl
 uv run python scripts/index_corpus.py        # embed + load into Postgres
 uv run python scripts/search.py "¿qué exige el artículo 4 sobre marcado?"
 uv run python scripts/search.py --mode dense "IEC 60364"   # or lexical / hybrid
 uv run python scripts/diagnose_retrieval.py  # dense vs lexical vs hybrid
+uv run python scripts/ask.py "¿qué obligaciones tienen los importadores?"
 ```
 
 Corpus documents are not committed (see `data/sources.md` for provenance and
@@ -90,7 +91,7 @@ duplication: the two renderings differ slightly in length, so window boundaries
 inside long articles land in different places and produce overlapping — not
 repeated — chunks.
 
-**This did not move recall@10** (12/17 before and after). Deduplication is
+**This did not move recall@10** (identical before and after). Deduplication is
 corpus hygiene: it halves the embedding cost of the affected norms and stops one
 clause occupying two result slots, but the retrieval failures below are failures
 of matching, not of slot competition. Worth recording as a negative result — and
@@ -101,17 +102,12 @@ improvement is attributable to the retrieval change alone.
 
 2,170 chunks embedded with `voyage-3` (1024 dimensions), cosine similarity.
 The corpus is its own ground truth here: for each probe, SQL finds by exact
-string match which chunks actually contain it, then dense retrieval is asked
-the same thing. No annotation required, and the measurement is reproducible
-with `scripts/diagnose_dense.py`.
+string match which chunks actually contain it, then each retriever is asked the
+same thing. No annotation required, and the measurement is reproducible with
+`scripts/diagnose_retrieval.py`. Per-retriever numbers are in the hybrid table
+below; dense alone reaches **17/22**.
 
-| Probe type | recall@10 |
-|---|---|
-| Identifiers (`IEC 60364`, `RESOL-2025-16-APN-SIYC#MEC`, `Ley N° 24.240`) | 6/9 |
-| Verbatim phrases (`declaración jurada de conformidad`) | 6/8 |
-| **Combined** | **12/17 (71%)** |
-
-**Roughly a third of questions whose answer sits verbatim in the corpus do not
+**Roughly a quarter of questions whose answer sits verbatim in the corpus do not
 retrieve it.** Two distinct failure modes, and both argue for lexical search
 alongside the vectors:
 
@@ -179,6 +175,49 @@ Two implementation details that matter:
 - **Ties break deterministically, on chunk id.** With two rankers, ties are
   common — both rank-1 results score exactly 1/61 — and an arbitrary order would
   make identical runs return different answers.
+
+### Answering: refusal is a state, and citations are verified
+
+Answers come back as a schema, not prose to be parsed:
+
+```python
+class Answer(BaseModel):
+    answerable: bool
+    answer: str
+    citations: list[Citation]        # country, norm_id, article
+    confidence: Literal["alta", "media", "baja"]
+```
+
+**Refusing is structural.** `answerable: false` is a field the caller branches
+on, not a sentence in the output that has to be pattern-matched. In compliance
+the two error directions are not equivalent: an invented answer costs a client
+an import held at customs, a "not in the corpus" costs them one more search. The
+system prompt says so in those terms, because a rule with its reason attached
+survives paraphrase better than a rule without one.
+
+Asked about a product model absent from the corpus, the assistant declines *and*
+says what it would need — "faltaría identificar el tipo de producto (eléctrico
+de baja tensión, equipo de telecomunicaciones) para vincularlo con el
+procedimiento correspondiente." Asked what sanctions Ley 24.240 sets out — a law
+the corpus repeatedly *references* but does not *contain*, and one the model
+certainly knows from training — it reports what the corpus does say (that
+infractions under Res. 16/2025 art. 6 are subject to that law), states that the
+sanctions articles themselves are not in the corpus, and declines to enumerate
+them.
+
+**Every citation is checked against what was actually retrieved.** A
+hallucinated citation is indistinguishable from a real one by reading it: same
+shape, plausible norm, plausible article. `unsupported_citations()` compares
+each returned `(country, norm_id, article)` against the triples actually placed
+in the context window, and the CLI marks any that fail and exits non-zero. The
+prompt asks the model not to invent citations; the check is what makes that
+claim verifiable rather than hoped-for.
+
+**Confidence is ordinal, not a float.** `alta` / `media` / `baja` rather than
+`0.87`, because a two-decimal number implies a calibration the model does not
+have. Three levels the prompt defines explicitly — *does the context answer this
+directly, partially, or only tangentially* — are a question the model can
+actually answer.
 
 ### No ANN index at this corpus size
 
