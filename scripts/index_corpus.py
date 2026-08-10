@@ -20,8 +20,10 @@ from dotenv import load_dotenv
 
 from regrag.embeddings import build_embedder
 from regrag.store import (
+    ANN_MIN_ROWS,
     create_schema,
     create_vector_index,
+    drop_vector_index,
     existing_chunk_ids,
     upsert_chunks,
 )
@@ -83,17 +85,13 @@ def main() -> None:
         f"{len(records)} chunks in {path.name}; "
         f"{len(already)} already indexed, {len(pending)} to go"
     )
-    if not pending:
-        print("nothing to do")
-        return
-
     # One batch per minute at the TPM ceiling keeps us inside both the token
     # and the request limits without needing to model them separately.
     budget = max(args.tpm - 500, 1000)
-    embedder = build_embedder()
     started = time.monotonic()
     done = 0
     spent = 0.0
+    embedder = build_embedder() if pending else None
 
     for batch, tokens in batches(pending, budget):
         window_start = time.monotonic()
@@ -116,13 +114,23 @@ def main() -> None:
         if pause > 0 and done < len(pending):
             time.sleep(pause)
 
-    print("building vector index...")
-    create_vector_index(conn)
-    conn.commit()
-
     with conn.cursor() as cur:
         cur.execute("SELECT count(*), count(DISTINCT norm_id) FROM chunks")
         rows, norms = cur.fetchone()
+
+    # Approximate search is a trade, and at this size there is nothing to buy:
+    # an exact scan is already fast. Leaving a stale index in place would be
+    # strictly worse than having none, so drop it rather than skip past it.
+    if rows >= ANN_MIN_ROWS:
+        print("building vector index...")
+        create_vector_index(conn)
+    else:
+        print(
+            f"skipping ANN index: {rows:,} rows is under the {ANN_MIN_ROWS:,} "
+            "threshold, exact search is faster than the recall it would cost"
+        )
+        drop_vector_index(conn)
+    conn.commit()
     conn.close()
 
     print(

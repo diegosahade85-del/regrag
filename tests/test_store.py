@@ -145,3 +145,55 @@ def test_existing_chunk_ids_reports_what_is_already_indexed(db):
     )
 
     assert existing_chunk_ids(db) == {'a#hybrid#0', 'b#hybrid#1'}
+
+
+def index_lists(conn):
+    '''The  value baked into the current ivfflat index definition.'''
+    import re
+    with conn.cursor() as cur:
+        cur.execute(
+            "SELECT indexdef FROM pg_indexes WHERE indexname = 'chunks_embedding'"
+        )
+        row = cur.fetchone()
+    if row is None:
+        return None
+    return int(re.search(r"lists\s*=\s*'?(\d+)", row[0]).group(1))
+
+
+def test_vector_index_is_created(db):
+    from regrag.store import create_vector_index
+
+    upsert_chunks(db, [record('a#hybrid#0', 'uno')], [EAST])
+    create_vector_index(db)
+
+    assert index_lists(db) is not None
+
+
+def test_vector_index_is_rebuilt_rather_than_left_stale(db):
+    '''An ivfflat index keeps centroids from the data present when it was built.
+
+    Building it before a load — or leaving a pre-TRUNCATE one in place — yields
+    an index whose centroids describe data that is no longer there. It raises no
+    error and returns wrong neighbours, so it must be rebuilt, not skipped.
+    '''
+    from regrag.store import create_vector_index
+
+    upsert_chunks(db, [record('a#hybrid#0', 'uno')], [EAST])
+    create_vector_index(db)
+    before = index_lists(db)
+
+    many = [record(f'c#hybrid#{i}', f'texto {i}') for i in range(2500)]
+    upsert_chunks(db, many, [EAST] * 2500)
+    create_vector_index(db)
+
+    assert index_lists(db) > before
+
+
+def test_index_lists_scale_with_row_count(db):
+    from regrag.store import create_vector_index
+
+    rows = [record(f'c#hybrid#{i}', f'texto {i}') for i in range(3000)]
+    upsert_chunks(db, rows, [EAST] * 3000)
+    create_vector_index(db)
+
+    assert index_lists(db) == 3

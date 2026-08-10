@@ -92,3 +92,22 @@ def test_keeps_prose_containing_an_ellipsis(tmp_path):
     path = write_html(tmp_path, '<p>El equipamiento... deberá certificarse.</p>')
 
     assert 'El equipamiento... deberá certificarse.' in extract_text(path)
+
+
+def test_drops_site_navigation_chrome(tmp_path):
+    path = write_html(
+        tmp_path,
+        '<header>Presidencia de la Nación</header>'
+        '<nav>Pasar al contenido principal Ir a Mi Argentina Buscar</nav>'
+        '<aside>Trámites destacados</aside>'
+        '<p>ARTÍCULO 1°.- OBJETO. Apruébase el Reglamento.</p>'
+        '<footer>Desarrollado por la Secretaría de Innovación</footer>',
+    )
+
+    text = extract_text(path)
+
+    assert 'ARTÍCULO 1°.- OBJETO. Apruébase el Reglamento.' in text
+    assert 'Presidencia de la Nación' not in text
+    assert 'Ir a Mi Argentina' not in text
+    assert 'Trámites destacados' not in text
+    assert 'Secretaría de Innovación' not in text

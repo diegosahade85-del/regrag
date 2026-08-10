@@ -51,14 +51,40 @@ def create_schema(conn: psycopg.Connection, dim: int = EMBEDDING_DIM) -> None:
         cur.execute("CREATE INDEX IF NOT EXISTS chunks_norm ON chunks (norm_id)")
 
 
-def create_vector_index(conn: psycopg.Connection, lists: int = 100) -> None:
-    """Build the ANN index. Run after loading — IVFFlat needs data to cluster."""
+# Below this many rows an exact scan is fast enough that an approximate index
+# only trades correctness for latency it doesn't need to save. Measured on this
+# corpus: 2,176 vectors scan exactly in ~17ms, while every IVFFlat setting that
+# reached full recall took 16-20ms. See README.
+ANN_MIN_ROWS = 50_000
+
+
+def create_vector_index(conn: psycopg.Connection, lists: int | None = None) -> None:
+    """(Re)build the IVFFlat index, sizing clusters to the current row count.
+
+    Always drops first. An IVFFlat index stores centroids computed from whatever
+    was in the table when it was built, so one built before a load — or left in
+    place across a TRUNCATE — describes data that is no longer there. It raises
+    no error and quietly returns the wrong neighbours; `CREATE INDEX IF NOT
+    EXISTS` is therefore the wrong statement here.
+    """
     with conn.cursor() as cur:
+        if lists is None:
+            cur.execute("SELECT count(*) FROM chunks")
+            (rows,) = cur.fetchone()
+            # pgvector's guidance for under a million rows.
+            lists = max(1, rows // 1000)
+
+        cur.execute("DROP INDEX IF EXISTS chunks_embedding")
         cur.execute(
-            "CREATE INDEX IF NOT EXISTS chunks_embedding "
+            "CREATE INDEX chunks_embedding "
             "ON chunks USING ivfflat (embedding vector_cosine_ops) "
             f"WITH (lists = {lists})"
         )
+
+
+def drop_vector_index(conn: psycopg.Connection) -> None:
+    with conn.cursor() as cur:
+        cur.execute("DROP INDEX IF EXISTS chunks_embedding")
 
 
 def upsert_chunks(
